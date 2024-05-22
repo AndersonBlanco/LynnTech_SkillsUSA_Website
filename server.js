@@ -11,7 +11,7 @@ const app = express();
     //or
 
 
-app.use(express.static(".")); 
+app.use(express.static("index"));
 app.get("/", (req, res) =>{
     res.sendFile(__dirname + "/index/index.html"); 
 })
