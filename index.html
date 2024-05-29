@@ -10,8 +10,17 @@
         <h2 style="background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); padding: 10vh 5vw;">Hello! We are currently updating the website to add new features so check back soon.</h2>
         <a style="color: white; font-weight: 600; font-size: 1.4em;" href="./index/index.html">Click Here For Preview</a>
     </div>
+    
+    <script src = "https://cdn.jsdelivr.net/npm/express-rate-limit@7.2.0/+esm"></script>
     <script>
+        /*
+ var limiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+}); 
+/**/
         onload = function(){
+            //console.log(document.location.host)
             document.location.href = "./index/index.html";
         }
 
