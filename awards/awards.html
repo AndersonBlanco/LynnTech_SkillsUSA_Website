@@ -293,11 +293,32 @@ const processData = fetch("./chapter_awards(Sheet1).csv")
                 //manipulate data
                 let years = obj.data[0];
                for(let x = 0; x <= years.length -1; x++){
-                let year = (years[x]);
+                let year = (years[x]); //getting year with length of obj.data[0] (this is the index of obj.data corresponding to thge list of years) this length == # of categories of awards
                 //console.log(year)
                 for(let y = 1; y <= obj.data.length -2; y++){
-                  //console.log(obj.data[y]);
-                 
+
+                  //remove single null awards indecies -START
+                  for(let str of obj.data[y]){
+                    if(str == null){
+                      let idx = obj.data[y].indexOf(str)
+                      //console.log("NUll value @: ", idx);
+                      obj.data[y].splice(idx, 1);
+                    }
+                  }
+                  //remove single null awards indecies -END
+
+
+                  //remove null awards sets - SATRT
+                  if(obj.data[y].length == 0){
+                    console.log("NULL data obj found @: ", y)
+                    obj.data.splice(y, 1); 
+                    
+                  }else{
+                    console.log(year)
+                    console.log(obj.data[y]);
+                  }
+                  //remove null awards sets - SATRT
+              
                 }
                }
               })
