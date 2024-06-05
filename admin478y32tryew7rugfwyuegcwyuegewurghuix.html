@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        git hub api access token: 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
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin478y32tryew7rugfwyuegcwyuegewurghuix</title>
+    <style>
+        html, body{
+            text-align:center;
+            align-items:center; 
+            justify-content: center;
+            padding-block: 1.5rem;
+        }
+        ul{
+        
+            display: flex;
+            flex-direction: column; 
+            list-style-position: inside; 
+            text-align:center;
+            
+        }
+
+        .cat_title{
+            font-size: 1.25rem;
+             font-weight: bold;
+        }
+
+        .profileFrame{
+    display: inline-block;
+    height: 300px;
+    width: 241px;
+    background-color: black;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    border-radius: 0px;
+    cursor: pointer;
+    margin-bottom: 90px;
+    /*box-shadow: 2px 2px 10px black;*/
+}
+
+.profileImg{
+    height: inherit;
+    width: inherit;
+    display: block;
+    object-fit: cover;
+    border-radius: inherit;
+}
+button{
+    cursor: pointer;
+    outline: none;
+    padding: .5rem 1rem;
+}
+        </style>
+</head>
+<body>
+    <h1>Admin</h1>
+<hr/>
+    <h1 class="cat_title">Comittes Images</h1>
+    <p>Name the files the same name as the comitte, ending with .jpg for each file</p>
+    <ul>
+        <li>Championship -> championship.jpg</li>
+        <li>Community -> community.jpg</li>
+        <li>Fundraising -> fundraising.jpg</li>
+        <li>Leadership -> leadership.jpg</li>
+        <li>Recruitment -> recruitment.jpg</li>
+        <li>Social -> social.jpg</li>
+        </ul>
+        
+
+    <legend>Drop folder/files</legend>
+    <input id = "comittes_imgs_filedrop" type = "file" />
+
+
+    <hr>
+
+    <h1 class="cat_title">Slider Images</h1>
+    <p>Name images in order 1-5 (max slider images is 5) and with .jpg extension</p>
+    <p>Uploaded images will only replace the current imgs with identical filename</p>
+    <p>Structure of slider images: </p>
+    <ul>
+        <li>img1.jpg</li>
+        <li>img2.jpg</li>
+        <li>img3.jpg</li>
+        <li>img4.jpg</li>
+        <li>img5.jpg</li>
+
+    </ul>
+
+    <legend>Drop folder/files</legend>
+    <input id = "slider_imgs_filedrop" type = "file" />
+
+
+    <hr>
+    <h1 class="cat_title">About US page </h1>
+    <p>For text files: files must end with .txt extension and have proper naming: </p>
+    <ul>
+        <li>English version -> eng_description.txt</li>
+        <li>Spanish version -> spn_description.txt</li>
+
+    </ul>
+
+    <legend>Drop txt folder/files</legend>
+    <input id="aboutUS_text_filedrop" type = "file" />
+<br/>
+<br/>
+<br/>
+    <legend>For images: mus have .jpg extension</legend>
+    <input id="about_us_image_filedrop" type = "file" />
+
+
+<hr>
+
+<h1 class="cat_title">Advisors</h1>
+ 
+<div class = "block">
+    <h3>General rules:</h3>
+    <ul>
+        <li>all images names end in .jpg </li>
+        <li>no special characters, including "/" and "."</li>
+        <li>"_" - underscores are allowed</li>
+    </ul>
+</div>
+
+<div id = "advisors">
+
+</div>
+
+ 
+
+<hr>
+
+ 
+</body>
+<script>
+ 
+
+ //fethcing advisor profiles: 
+ fetch("../variables.json")
+.then(async r=>r.json())
+.then(_json=>{
+ const advisorsJsonFileNames= _json.advisors;
+ console.log(advisorsJsonFileNames)
+ for(let a of advisorsJsonFileNames){  
+
+  const xhttp = new XMLHttpRequest();
+ xhttp.onload = () =>{
+            if(xhttp.readyState=4 && xhttp.status=="200"){ //"200" = okey status (suscesful/healthy)
+            let obj = JSON.parse(xhttp.responseText);
+             console.log(obj)
+             document.getElementById("advisors").innerHTML += `
+               <div class="profileFrame">
+                   <img class="profileImg" src = "../memberPage/advisorsImgs/${obj.img}"/>
+                   <p class="memberName">${obj.name}</p>
+               <p class="memberGrade">${obj.vocation}</p>
+               <p class="memberGrade">${obj.grade_level}</p>
+               <p class="memberPosition">${obj.position}</p>
+               <button class = "button" id = "edit">Edit</button>
+               <button class = "button" id = "edit">Delete</button>
+                </div>
+             `;
+
+            }
+          }
+
+
+
+          xhttp.open("GET", `./memberPage/advisorsObjs/${a}`, true);
+          xhttp.send()
+        }
+
+        }); 
+</script>
+</html>
